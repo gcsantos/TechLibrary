@@ -9,7 +9,7 @@ public class ExceptionFilter : IExceptionFilter
 {
     public void OnException(ExceptionContext context)
     {
-        if(context.Exception is TechLibraryException techLibraryException)
+        if (context.Exception is TechLibraryException techLibraryException)
         {
             context.HttpContext.Response.StatusCode = (int)techLibraryException.GetStatusCode();
             context.Result = new ObjectResult(new ResponseErrorMessagesJson
@@ -17,12 +17,12 @@ public class ExceptionFilter : IExceptionFilter
                 Errors = techLibraryException.GetErrorMessages()
             });
         }
-        else 
+        else
         {
             context.HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
             context.Result = new ObjectResult(new ResponseErrorMessagesJson
             {
-                Errors = ["Erro Desconhecido."]
+                Errors = ["Erro desconhecido!"]
             });
         }
     }
